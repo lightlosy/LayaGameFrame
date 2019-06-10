@@ -2,8 +2,8 @@ import { MVCS } from "../../core/mvc/mvcs";
 import BaseManager from "../base/BaseManager";
 import Manager from "../Manager";
 
-let w = 960;
-let h = 640;
+let w = 640;
+let h = 1136;
 
 class viewElement {
     /** 资源路径 */
@@ -20,15 +20,16 @@ class viewElement {
 
 export default class UIManager extends BaseManager {
     private _views: {[key: string]: viewElement} = {};
-    private _root: Laya.Sprite = new Laya.Sprite();
 
+    private _root: Laya.Sprite = new Laya.Sprite();
     constructor(){
         super();
-        Laya.stage.addChild(this._root);
         this._root.width = w;
         this._root.height = h;
         this._root.x = 0;
         this._root.y = 0;
+        this._root.zOrder = 1;
+        Laya.stage.addChild(this._root);
     }
 
     open(resPath: string, zIndex?: number, openEffect?: number): Promise<Laya.Sprite>{
@@ -40,40 +41,46 @@ export default class UIManager extends BaseManager {
             let openSuc = (viewNode: Laya.Sprite) => {
                 viewNode.zOrder = zIndex || 0;
             }
-            if(!view.instance){
+            if(!view.node){
                 this._createView(resPath).then((viewObj: Laya.Sprite) => {
                     openSuc(viewObj);
                     resolve(viewObj);
                 });
             }else{
-                view.instance.owner.active = true;
+                view.node.visible = true;
                 openSuc(view.node);
                 resolve(view.node);
             }
         });
     }
 
-    // getView<T>(resPath: string): Promise<T>{
-    //     return new Promise((resolve) => {
-    //         let view: any = this._views[resPath];
-    //         if(!view){
-    //             this._createView(resPath).then((view: any) => {
-    //                 resolve(view.instance);
-    //             });
-    //         }else{
-    //             resolve(view.instance);
-    //         }
-    //     });
-    // }
+    getView<T>(resPath: string): Promise<T>{
+        return new Promise((resolve) => {
+            let view: any = this._views[resPath];
+            if(!view){
+                this._createView(resPath).then((view: any) => {
+                    resolve(view.instance);
+                });
+            }else{
+                resolve(view.instance);
+            }
+        });
+    }
 
+    /**
+     * 关闭ui
+     * @param resPath 路径
+     * @param isDelete 是否销毁
+     */
     close(resPath: string, isDelete: boolean = false){
         let view = this._views[resPath];
-        if(view && view.instance){
+        console.log(view, resPath);
+        if(view && view.node){
             if(isDelete){
-                view.instance.owner.destroy();
+                view.node.destroy();
                 this._views[resPath] = null;
             }else{
-                view.instance.owner.active = false;
+                view.node.visible = false;
             }
         }
     }

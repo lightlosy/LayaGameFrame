@@ -14,12 +14,12 @@ export default class ResManager extends BaseManager {
     //     return this._getAudio(path);
     // }
 
-    // /** 获取resources/textures/draw/目录下的资源 */
-    // getDraw(name: string): Promise<cc.SpriteFrame> {
-    //     let path = "textures/draw/";
-    //     let atlasName = "0-draw"; //没有图集则为空
-    //     return this._getSprite(path, name, atlasName);
-    // }
+    /** 获取resources/textures/draw/目录下的资源 */
+    getComp(name: string): string {
+        let path = "comp/" + name + ".png";
+        // let atlasName = "0-draw"; //没有图集则为空
+        return path;
+    }
 
     // /** 获取配置 */
     // getMonsterConfig(name: string): Promise<cc.JsonAsset> {
