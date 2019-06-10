@@ -2,14 +2,4 @@
 import View=Laya.View;
 import Dialog=Laya.Dialog;
 import Scene=Laya.Scene;
-export module ui.test {
-    export class TestSceneUI extends Scene {
-		public scoreLbl:Laya.Label;
-		public tipLbll:Laya.Label;
-        constructor(){ super()}
-        createChildren():void {
-            super.createChildren();
-            this.loadScene("test/TestScene");
-        }
-    }
-}
+var REG: Function = Laya.ClassUtils.regClass;

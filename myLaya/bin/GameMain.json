@@ -1,0 +1,1 @@
+{"type":"Scene","props":{"width":640,"height":1136},"compId":2,"child":[{"type":"Script","props":{"runtime":"GameLaunch.ts"},"compId":4},{"type":"Sprite","props":{"y":316,"x":270,"texture":"test/b1.png"},"compId":6}],"loadList":["test/b1.png"],"loadList3D":[]}
