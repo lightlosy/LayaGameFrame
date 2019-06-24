@@ -23,10 +23,10 @@ export default class AssetsManager extends BaseManager {
     //     return this.loadAssetsAsync(path, cc.AudioClip);
     // }
 
-    // /** 加载配置 */
-    // loadConfig(path: string): Promise<cc.JsonAsset>{
-    //     return this.loadAssetsAsync(path, cc.JsonAsset);
-    // }
+    /** 加载配置 */
+    loadConfig(path: string): Promise<any>{
+        return this.loadAssetsAsync(path);
+    }
 
     loadAssetsAsync(path: string, type?: any): Promise<any> {
         return new Promise((resolve: Function, reject: Function) => {

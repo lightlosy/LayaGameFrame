@@ -24,11 +24,17 @@ export default class UIManager extends BaseManager {
     private _root: Laya.Sprite = new Laya.Sprite();
     constructor(){
         super();
-        this._root.width = w;
-        this._root.height = h;
+        let dw = Laya.stage.designWidth;
+        let dh = Laya.stage.designHeight;
+        this._root.width = dw;
+        this._root.height = dh;
         this._root.x = 0;
         this._root.y = 0;
         this._root.zOrder = 1;
+        let wid: Laya.Widget = this._root.addComponent(Laya.Widget);
+        console.log("UIManager----->LayaStage designW: ", dw, " designH: ", dh);
+        wid.centerX = dw / 2;
+        wid.centerY = dh / 2;
         Laya.stage.addChild(this._root);
     }
 

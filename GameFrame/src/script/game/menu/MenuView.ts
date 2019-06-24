@@ -14,6 +14,8 @@ export default class MenuView extends Laya.Script {
         let img = this.owner.getChildByName("img") as Laya.Image;
         img.skin = Manager.Res.getComp("btn_close");
         console.log(img.skin);
+        // console.log('加载配置');
+        
     }
 
     onDisable(): void {

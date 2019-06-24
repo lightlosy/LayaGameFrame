@@ -9,12 +9,18 @@ export default class GameLaunch extends Laya.Script {
     onAwake(){
         this._managerList.push(new Manager());
         console.log('[GameLaunch.ts]---->初始化');
-        this.initScene3D();
+        // this.initScene3D();
         this.test();
     }
 
     test(){
-        // Manager.UI.open(ResPath.uiPath.UI_MainUI, 1, 1);
+        Manager.UI.open(ResPath.uiPath.UI_MainUI, 1, 1);
+
+        Manager.Res.getMonsterConfig('monster1.json').then((res) => {
+            console.log('----json', res[1].name);
+        }).catch(()=>{
+            console.log("fail")
+        });
     }
 
     initScene3D(){
@@ -25,8 +31,8 @@ export default class GameLaunch extends Laya.Script {
 
         //添加照相机
         var camera: Laya.Camera = (scene.addChild(new Laya.Camera(0, 0.1, 100))) as Laya.Camera;
-        camera.transform.translate(new Laya.Vector3(0, 3, 3));
-        camera.transform.rotate(new Laya.Vector3(-30, 0, 0), true, false);
+        camera.transform.translate(new Laya.Vector3(0, 10, 3));
+        camera.transform.rotate(new Laya.Vector3(-60, 0, 0), true, false);
 
         //添加方向光
         var directionLight: Laya.DirectionLight = scene.addChild(new Laya.DirectionLight()) as Laya.DirectionLight;
@@ -43,6 +49,31 @@ export default class GameLaunch extends Laya.Script {
         box.meshRenderer.material = material;
         Laya.timer.loop(16, this, () => {
             box.transform.rotate(new Laya.Vector3(0, 120 * 0.016, 0), false, false);
+            // box.transform.translate(new Laya.Vector3(0, 0, -0.5 * 0.016), false);
+        });
+        let isDown = false;
+        let x = 0;
+        let y = 0;
+        Laya.stage.on(Laya.Event.MOUSE_DOWN, this, () => {
+            isDown = true;
+            x = Laya.MouseManager.instance.mouseX;
+            y = Laya.MouseManager.instance.mouseY;
+            Manager.Sound.play(ResPath.audioPath.btnClick);
+        });
+        Laya.stage.on(Laya.Event.MOUSE_MOVE, this, () => {
+            if(!isDown) return;
+            let dtx = Laya.MouseManager.instance.mouseX - x;
+            let dty = Laya.MouseManager.instance.mouseY - y;
+            dtx = dtx > 100 ? 100 : dtx;
+            dtx = dtx < -100 ? -100 : dtx;
+            dty = dty > 100 ? 100 : dty;
+            dty = dty < -100 ? -100 : dty;
+            let v3 = new Laya.Vector3(dtx * 0.016 * 0.1, 0, dty * 0.016 * 0.1);
+            // Laya.Vector3.Clamp(v3, new Laya.Vector3(-100, -100, -100), new Laya.Vector3(100, 100, 100), v3);
+            box.transform.translate(v3, false);
+        });
+        Laya.stage.on(Laya.Event.MOUSE_UP, this, () => {
+            isDown = false;
         });
     }
 

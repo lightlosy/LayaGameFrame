@@ -2,11 +2,11 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":6,
+    "selecteID":3,
     "searchKey":"Scene",
-    "props":{"width":640,"sceneColor":"#000000","height":1136},
+    "props":{"width":720,"sceneColor":"#000000","height":1280},
     "nodeParent":-1,
-    "maxID":7,
+    "maxID":11,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -30,6 +30,52 @@
             "compId":3,
             "child":[
                 ]
+        },
+        {
+            "x":15,
+            "type":"Widget",
+            "switchAble":true,
+            "searchKey":"Widget",
+            "removeAble":true,
+            "props":{"top":0,"right":0,"left":0,"bottom":0},
+            "nodeParent":2,
+            "label":"Widget",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":7,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,Canvas",
+            "props":{"y":640,"x":360,"name":"Canvas"},
+            "nodeParent":2,
+            "label":"Canvas",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":9,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Widget",
+                    "switchAble":true,
+                    "searchKey":"Widget",
+                    "removeAble":true,
+                    "props":{"centerY":0,"centerX":0},
+                    "nodeParent":9,
+                    "label":"Widget",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":10,
+                    "child":[
+                        ]
+                }]
         }],
     "animations":[
         {

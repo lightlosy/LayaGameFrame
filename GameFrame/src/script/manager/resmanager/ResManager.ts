@@ -21,11 +21,11 @@ export default class ResManager extends BaseManager {
         return path;
     }
 
-    // /** 获取配置 */
-    // getMonsterConfig(name: string): Promise<cc.JsonAsset> {
-    //     let path = "config/auto/";
-    //     return this._getConfig(path + name);
-    // }
+    /** 获取配置 */
+    getMonsterConfig(name: string): Promise<any> {
+        let path = "config/auto/";
+        return this._getConfig(path + name);
+    }
 
     // //------------------------------------------------------------
     private _assetMgr: AssetsManager = Manager.Assets;
@@ -79,19 +79,19 @@ export default class ResManager extends BaseManager {
         });
     }
 
-    // private _getConfig(path: string): Promise<cc.JsonAsset> {
-    //     return new Promise((resolve, reject) => {
-    //         this._assetMgr.loadConfig(path).then((res) => {
-    //             if(res){
-    //                 resolve(res.json);
-    //             }else{
-    //                 reject();
-    //             }
-    //         }).catch(() => {
-    //             reject();
-    //         });
-    //     });
-    // }
+    private _getConfig(path: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this._assetMgr.loadConfig(path).then((res) => {
+                if(res){
+                    resolve(res);
+                }else{
+                    reject();
+                }
+            }).catch(() => {
+                reject();
+            });
+        });
+    }
 
     // private _getAudio(path: string): Promise<cc.AudioClip> {
     //     return new Promise((resolve, reject) => {
