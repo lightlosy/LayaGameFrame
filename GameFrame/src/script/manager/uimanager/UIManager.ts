@@ -2,9 +2,6 @@ import { MVCS } from "../../core/mvc/mvcs";
 import BaseManager from "../base/BaseManager";
 import Manager from "../Manager";
 
-let w = 640;
-let h = 1136;
-
 class viewElement {
     /** 资源路径 */
     path: string;
@@ -24,17 +21,18 @@ export default class UIManager extends BaseManager {
     private _root: Laya.Sprite = new Laya.Sprite();
     constructor(){
         super();
-        let dw = Laya.stage.designWidth;
-        let dh = Laya.stage.designHeight;
-        this._root.width = dw;
-        this._root.height = dh;
+        let w = Laya.stage.designWidth;
+        let h = Laya.stage.designHeight;
+
+        this._root.width = w;
+        this._root.height = h;
         this._root.x = 0;
         this._root.y = 0;
         this._root.zOrder = 1;
         let wid: Laya.Widget = this._root.addComponent(Laya.Widget);
-        console.log("UIManager----->LayaStage designW: ", dw, " designH: ", dh);
-        wid.centerX = dw / 2;
-        wid.centerY = dh / 2;
+        console.log("UIManager----->LayaStage designW: ", w, " designH: ", h);
+        wid.centerX = w / 2;
+        wid.centerY = h / 2;
         Laya.stage.addChild(this._root);
     }
 
